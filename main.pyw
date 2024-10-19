@@ -24,7 +24,7 @@ PICKLE_PATH = "configs/last_save.pickle"
 
 
 def get_apps() -> dict:
-    with open('data/apps.json', 'r') as f:
+    with open('data/apps.json', 'r', encoding='utf-8') as f:
         return json.load(f)
 
 
@@ -36,7 +36,7 @@ def format_date_now():
 def get_config() -> configparser.ConfigParser:
     try:
         configs = configparser.ConfigParser()
-        configs.read(CONF_PATH)
+        configs.read(CONF_PATH, encoding='utf-8')
         return configs
 
     except Exception as ex:
@@ -202,7 +202,6 @@ def create_processes_names_list() -> list[str]:
         raise SystemExit
 
 
-
 def create_processes_names_set() -> set:
     processes_list = create_processes_names_list()
 
@@ -213,7 +212,7 @@ def create_processes_names_set() -> set:
 
 
 def no_ignore_process_name(process: str):
-    with open('data/process_ignore.json', 'r') as f:
+    with open('data/process_ignore.json', 'r', encoding='utf-8') as f:
         ignore_names = json.load(f)
     return process not in ignore_names
 
@@ -226,7 +225,7 @@ def write_time(processes_time: ProcessesTime, pause: int = TIME):
     global PATH
 
     try:
-        with open(PATH, 'w') as f:
+        with open(PATH, 'w', encoding='utf-8') as f:
             marked_proc, all_proc = processes_time.get_info()
             text = f"{'  LOOKING  ':=^40s}\n\n{marked_proc}\n\n{'  ALL  ':=^40s}\n\n{all_proc}"
             f.write(text)
@@ -246,7 +245,7 @@ def save_pickle(processes: ProcessesTime) -> None:
 
 def save_configs(conf) -> None:
     try:
-        with open(CONF_PATH, 'w') as f:
+        with open(CONF_PATH, 'w', encoding='utf-8') as f:
             conf.write(f)
     except Exception as ex:
         logging.error(f"save_configs:  {ex}")
@@ -342,7 +341,7 @@ if __name__ == '__main__':
     logging.info("START PROGRAM")
     try:
 
-        calibration()
+        # calibration()
         main()
     except Exception as ex:
 
