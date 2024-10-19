@@ -341,7 +341,7 @@ if __name__ == '__main__':
     logging.info("START PROGRAM")
     try:
 
-        # calibration()
+        calibration()
         main()
     except Exception as ex:
 
