@@ -87,6 +87,7 @@ def set_save_path() -> None:
                 conf['MAIN_SETTING']['path'] = new_path
                 save_configs(conf)
             else:
+                _ = input("Путь не найден...")
                 logging.warning(f"New path {new_path} was not found")
     except Exception as ex:
         logging.error(f"set_save_path: {ex}")
